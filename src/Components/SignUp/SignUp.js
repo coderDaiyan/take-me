@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import "./SignUp.css";
 import Google from "../../assets/icon/search.svg";
 import Github from "../../assets/icon/github.svg";
@@ -7,19 +7,48 @@ import Github from "../../assets/icon/github.svg";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { firebaseConfig } from "./firebase.config";
+import { UserContext } from "../../App";
 
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+} else {
+  firebase.app();
+}
 
 const SignUp = () => {
+  const history = useHistory();
+  const location = useLocation();
+  let { from } = location.state || { from: { pathname: "/" } };
+
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    error: "",
+    message: "",
+  });
+  const [newUser, setNewUser] = useState(false);
   const handleGoogleSignIn = () => {
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then((result) => {
-        /** @type {firebase.auth.OAuthCredential} */
-        var user = result.user;
-        console.log(user);
+      .then((res) => {
+        // ? Sign in successful
+        const { displayName, photoURL, email } = res.user;
+        const signedInUser = {
+          isSignedIn: true,
+          name: displayName,
+          email: email,
+          password: "",
+          photo: photoURL,
+        };
+        setUser(signedInUser);
+        setLoggedInUser(signedInUser);
+        history.replace(from);
+        console.log(displayName, photoURL, email);
       })
       .catch((error) => {
         // Handle Errors here.
@@ -35,9 +64,15 @@ const SignUp = () => {
       .auth()
       .signInWithPopup(provider)
       .then((result) => {
-        /** @type {firebase.auth.OAuthCredential} */
         var user = result.user;
-        console.log(user);
+        const signedInUser = {
+          name: user.displayName,
+          email: user.email,
+        };
+        setLoggedInUser(signedInUser);
+        setUser(signedInUser);
+        console.log(signedInUser);
+        history.replace(from);
       })
       .catch((error) => {
         // Handle Errors here.
@@ -46,94 +81,169 @@ const SignUp = () => {
       });
   };
 
+  let isFieldValid = true;
+  const handleBlur = (e) => {
+    if (e.target.name === "email") {
+      isFieldValid = /\S+@\S+\.\S+/.test(e.target.value);
+    } else if (e.target.name === "password") {
+      const isPasswordValid = e.target.value.length > 6;
+      const passwordHasNumber = /\d{1}/.test(e.target.value);
+      const passwordHasSpecialCharacter = /\W|_/g.test(e.target.value);
+      isFieldValid =
+        isPasswordValid && passwordHasNumber && passwordHasSpecialCharacter;
+    }
+    if (isFieldValid) {
+      const newUserInfo = { ...user };
+      newUserInfo[e.target.name] = e.target.value;
+      setUser(newUserInfo);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    if (
+      document.getElementById("password").value !==
+      document.getElementById("password-confirm").value
+    ) {
+      alert(`Password Not Matched`);
+    }
+    if (user.email && user.password) {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(user.email, user.password)
+        .then((userCredential) => {
+          // Signed in
+          var user = userCredential.user;
+          const signedInUser = {
+            name: user.displayName,
+            email: user.email,
+          };
+          setUser(signedInUser);
+          history.replace(from);
+        })
+        .catch((error) => {
+          var errorMessage = error.message;
+          const newUserInfo = { ...user };
+          newUserInfo.error = errorMessage;
+          setUser(newUserInfo);
+        });
+    }
+
+    e.preventDefault();
+  };
+
   return (
-    <div className="container">
-      <div className="signup">
-        <h2 className="fw-bold m-3">Create Account</h2>
-        <form>
-          <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">
-              Name
-            </label>
-            <input
-              type="name"
-              placeholder="Name..."
-              className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">
-              Email
-            </label>
-            <input
-              type="email"
-              placeholder="Email..."
-              className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="exampleInputPassword1" className="form-label">
-              Password
-            </label>
-            <input
-              type="password"
-              placeholder="Type Your Password..."
-              className="form-control"
-              id="exampleInputPassword1"
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="exampleInputPassword1" className="form-label">
-              Password Confirmation
-            </label>
-            <input
-              type="password"
-              placeholder="Type Again..."
-              className="form-control"
-              id="exampleInputPassword1"
-            />
-          </div>
-          <button type="submit" className="btn btn-success w-100">
-            Submit
-          </button>
-          <p className="text-center mt-4">
-            Already Have an Account ?{" "}
-            <Link to="/login" style={{ color: "#157347" }}>
-              Log In
-            </Link>
-          </p>
-        </form>
-        <p className="text-center">OR</p>
-        <div className="social-signin">
-          <div className="google-sign-in">
-            <img className="social" src={Google} alt="" />
-            <h5>
-              <Link
-                onClick={handleGoogleSignIn}
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                Sign in with google
+    <>
+      <div className="container">
+        <div className="signup">
+          <h2 className="fw-bold m-3">Create Account</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="exampleInputEmail1" className="form-label">
+                Name
+              </label>
+              <input
+                onBlur={handleBlur}
+                type="name"
+                name="name"
+                placeholder="Name..."
+                className="form-control"
+                id="exampleInputEmail1"
+                required
+                aria-describedby="emailHelp"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="exampleInputEmail1" className="form-label">
+                Email
+              </label>
+              <input
+                onBlur={handleBlur}
+                type="email"
+                name="email"
+                placeholder="Email..."
+                className="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="exampleInputPassword1" className="form-label">
+                Password
+              </label>
+              <input
+                onBlur={handleBlur}
+                type="password"
+                name="password"
+                id="password"
+                required
+                placeholder="Type Your Password..."
+                className="form-control"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="exampleInputPassword1" className="form-label">
+                Password Confirmation
+              </label>
+              <input
+                onBlur={handleBlur}
+                type="password"
+                name="password"
+                id="password-confirm"
+                required
+                placeholder="Type Again..."
+                className="form-control"
+              />
+            </div>
+            <div className="requirements-for-pass">
+              <h5>Characteristics for strong password</h5>
+              <ul>
+                <li>Minimum 8 Characters</li>
+                <li>Minimum 1 Special Character</li>
+                <li>Minimum 1 Number</li>
+              </ul>
+            </div>
+            {user.message && user.message}
+            <button type="submit" className="btn btn-success w-100">
+              Sign Up
+            </button>
+            <p className="text-center mt-4">
+              Already Have an Account ?{" "}
+              <Link to="/login" style={{ color: "#157347" }}>
+                Log In
               </Link>
-            </h5>
-          </div>
-          <div className="github-sign-in">
-            <img className="social" src={Github} alt="" />
-            <h5>
-              <Link
-                onClick={handleGithubSignIn}
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                Sign in with github
-              </Link>
-            </h5>
+            </p>
+          </form>
+          <div style={{ marginTop: "7rem" }}>
+            <p className="text-center">OR</p>
+            <div className="social-signin">
+              <div className="google-sign-in">
+                <img className="social" src={Google} alt="" />
+                <h5>
+                  <Link
+                    onClick={handleGoogleSignIn}
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    Sign in with google
+                  </Link>
+                </h5>
+              </div>
+              <div className="github-sign-in">
+                <img className="social" src={Github} alt="" />
+                <h5>
+                  <Link
+                    onClick={handleGithubSignIn}
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    Sign in with github
+                  </Link>
+                </h5>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

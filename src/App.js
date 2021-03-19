@@ -2,12 +2,17 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Components/Home/Home";
-import Search from "./Components/Search/Search";
+import PickUpPoint from "./Components/PickUpPoint/PickUpPoint";
 import SignUp from "./Components/SignUp/SignUp";
+import { createContext, useState } from "react";
+import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
+
+export const UserContext = createContext();
 
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState({});
   return (
-    <>
+    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>
         <Navbar />
         <Switch>
@@ -20,10 +25,12 @@ function App() {
           <Route path="/login">
             <SignUp />
           </Route>
-          <Route path="/search/:vehicle"></Route>
+          <PrivateRoute path="/pickup/:vehicle">
+            <PickUpPoint />
+          </PrivateRoute>
         </Switch>
       </Router>
-    </>
+    </UserContext.Provider>
   );
 }
 

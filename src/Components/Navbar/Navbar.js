@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../App";
 
 const Navbar = () => {
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
   return (
     <>
       <nav className="navbar fixed-top navbar-expand-lg navbar-dark p-md-3 mb-5">
@@ -40,13 +42,22 @@ const Navbar = () => {
                   Contact
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  <button className="btn btn-outline-success login-btn">
-                    Login
-                  </button>
-                </Link>
-              </li>
+              {loggedInUser.name ? (
+                <li
+                  className="nav-item text-dark mt-2"
+                  style={{ marginLeft: "10px" }}
+                >
+                  {loggedInUser.name}
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <Link className="nav-link" to="/login">
+                    <button className="btn btn-outline-success login-btn">
+                      Login
+                    </button>
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>
