@@ -1,0 +1,27 @@
+.all-vehicle-cards {
+  margin-top: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.vehicle-card {
+  width: 220px;
+  height: 190px;
+  background-color: white;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.vehicle-card h2 {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.vehicle-img {
+  width: 100px;
+  margin: 15px;
+}

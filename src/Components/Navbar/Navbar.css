@@ -1,3 +1,7 @@
 nav ul {
   font-weight: 500;
 }
+.login-btn {
+  position: absolute;
+  top: 18px;
+}

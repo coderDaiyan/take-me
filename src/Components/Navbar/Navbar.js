@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <>
-      <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3">
-        <div class="container">
-          <Link class="navbar-brand text-dark fw-bold" href="/">
-            Web Zone
+      <nav className="navbar fixed-top navbar-expand-lg navbar-dark p-md-3 mb-5">
+        <div className="container">
+          <Link className="navbar-brand text-dark fw-bold" to="/">
+            Take-Me
           </Link>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="/navbarNav"
@@ -19,35 +19,32 @@ const Navbar = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <div class="mx-auto"></div>
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <Link class="nav-link text-dark" href="/">
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <div className="mx-auto"></div>
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <Link className="nav-link text-dark" to="/home">
                   Home
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link text-dark" href="/">
-                  About
+              <li className="nav-item">
+                <Link className="nav-link text-dark" to="/">
+                  Destination
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link text-dark" href="/">
-                  Blog
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link text-dark" href="/">
-                  Pricing
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link text-dark" href="/">
+              <li className="nav-item">
+                <Link className="nav-link text-dark" to="/contact">
                   Contact
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">
+                  <button className="btn btn-outline-success login-btn">
+                    Login
+                  </button>
                 </Link>
               </li>
             </ul>

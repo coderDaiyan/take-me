@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+.signup {
+  margin-top: 5.5rem;
+  border: 2px solid black;
+  width: 500px;
+  height: 530px;
+}
+.google-sign-in,
+.github-sign-in {
+  width: 280px;
+  margin: auto;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+.google-sign-in h5,
+.github-sign-in h5 {
+  text-align: center;
+}
+.google-sign-in img,
+.github-sign-in img {
+  margin-right: 25px;
+}
+.github-sign-in {
+  margin-top: 20px;
+}
+form {
+  margin: 25px;
+}
+input:focus,
+input:active {
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.308) !important;
+}
+.social {
+  width: 30px;
+}
