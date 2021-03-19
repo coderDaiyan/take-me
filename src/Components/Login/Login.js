@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import "./SignUp.css";
+import "./Login.css";
 import Google from "../../assets/icon/search.svg";
 import Github from "../../assets/icon/github.svg";
 
@@ -16,11 +16,11 @@ if (!firebase.apps.length) {
 }
 
 const SignUp = () => {
-  const history = useHistory();
-  const location = useLocation();
-  let { from } = location.state || { from: { pathname: "/" } };
-
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+  console.log(loggedInUser);
+  let history = useHistory();
+  let location = useLocation();
+  let { from } = location.state || { from: { pathname: "/pickup/:vehicle" } };
 
   const [user, setUser] = useState({
     name: "",
@@ -36,19 +36,18 @@ const SignUp = () => {
       .auth()
       .signInWithPopup(provider)
       .then((res) => {
+        console.log(res.user);
         // ? Sign in successful
-        const { displayName, photoURL, email } = res.user;
+        const { displayName, email } = res.user;
         const signedInUser = {
           isSignedIn: true,
           name: displayName,
           email: email,
           password: "",
-          photo: photoURL,
         };
         setUser(signedInUser);
         setLoggedInUser(signedInUser);
         history.replace(from);
-        console.log(displayName, photoURL, email);
       })
       .catch((error) => {
         // Handle Errors here.
@@ -65,9 +64,10 @@ const SignUp = () => {
       .signInWithPopup(provider)
       .then((result) => {
         var user = result.user;
+        const { displayName, email } = user;
         const signedInUser = {
-          name: user.displayName,
-          email: user.email,
+          name: displayName,
+          email: email,
         };
         setLoggedInUser(signedInUser);
         setUser(signedInUser);
@@ -115,18 +115,20 @@ const SignUp = () => {
         .createUserWithEmailAndPassword(user.email, user.password)
         .then((userCredential) => {
           // Signed in
-          const user = userCredential.user;
-        })
-        .then((res) => {
-          // * Success Message
-          const userInfo = { ...user };
+          var newUser = userCredential.user;
+          let userInfo = { ...user };
+          userInfo = {
+            name: newUser.displayName,
+            email: newUser.email,
+          };
           userInfo.message = (
             <p style={{ color: "green" }}>
               Congratulations! Account is Created
             </p>
           );
+          console.log(userInfo);
           setUser(userInfo);
-          history.replace(from);
+          setLoggedInUser(userInfo);
         })
         .catch((error) => {
           const errorMessage = error.message;
@@ -135,8 +137,8 @@ const SignUp = () => {
           setUser(userInfo);
         });
     }
-
     if (!newUser && user.email && user.password) {
+      console.log(user.email, user.password);
       firebase
         .auth()
         .signInWithEmailAndPassword(user.email, user.password)
@@ -146,6 +148,7 @@ const SignUp = () => {
             <p style={{ color: "green" }}>Account Logged In Successfully</p>
           );
           setUser(userInfo);
+          setLoggedInUser(userInfo);
           history.replace(from);
         })
         .catch((error) => {
@@ -236,7 +239,7 @@ const SignUp = () => {
             </div>
             {user.message && user.message}
             <button type="submit" className="btn btn-success w-100">
-              {newUser ? "Sign Up" : "Sign In"}
+              Sign Up
             </button>
             <p className="text-center mt-4">
               {newUser
@@ -244,13 +247,20 @@ const SignUp = () => {
                 : `Don't Have an Account ?`}{" "}
               <Link
                 onClick={() => setNewUser(!newUser)}
-                to="/signup"
+                to="/login"
                 style={{ color: "#157347" }}
               >
                 {newUser ? "Log In" : "Create Account"}
               </Link>
             </p>
           </form>
+          {/* <button
+            onClick={handleSignIn}
+            type="submit"
+            className="btn btn-success w-100"
+          >
+            Sign In
+          </button> */}
           <div style={{ marginTop: "12rem" }}>
             <p className="text-center">OR</p>
             <div className="social-signin">

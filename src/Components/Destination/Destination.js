@@ -1,5 +1,5 @@
 import React from "react";
-import "./PickUpPoint.css";
+import "./Destination.css";
 import Map from "../../assets/images/Map.png";
 
 const PickUpPoint = () => {

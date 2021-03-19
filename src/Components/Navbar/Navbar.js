@@ -28,19 +28,13 @@ const Navbar = () => {
             <div className="mx-auto"></div>
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link className="nav-link text-dark" to="/home">
-                  Home
-                </Link>
+                <Link className="nav-link text-dark">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-dark" to="/">
-                  Destination
-                </Link>
+                <Link className="nav-link text-dark">Destination</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-dark" to="/contact">
-                  Contact
-                </Link>
+                <Link className="nav-link text-dark">Contact</Link>
               </li>
               {loggedInUser.name ? (
                 <li
@@ -51,7 +45,7 @@ const Navbar = () => {
                 </li>
               ) : (
                 <li className="nav-item">
-                  <Link className="nav-link" to="/signup">
+                  <Link className="nav-link" to="/login">
                     <button className="btn btn-outline-success login-btn">
                       Login
                     </button>

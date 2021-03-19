@@ -4,6 +4,7 @@ import { UserContext } from "../../App";
 
 const PrivateRoute = ({ children, ...rest }) => {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+  console.log(loggedInUser);
   return (
     <Route
       {...rest}
@@ -13,7 +14,7 @@ const PrivateRoute = ({ children, ...rest }) => {
         ) : (
           <Redirect
             to={{
-              pathname: "/signup",
+              pathname: "/login",
               state: { from: location },
             }}
           />
