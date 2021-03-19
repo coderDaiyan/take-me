@@ -106,28 +106,55 @@ const SignUp = () => {
     ) {
       alert(`Password Not Matched`);
     }
-    if (user.email && user.password) {
+    if (!isFieldValid) {
+      alert("Error: Not Valid Email or Password");
+    }
+    if (newUser && user.email && user.password) {
       firebase
         .auth()
         .createUserWithEmailAndPassword(user.email, user.password)
         .then((userCredential) => {
           // Signed in
-          var user = userCredential.user;
-          const signedInUser = {
-            name: user.displayName,
-            email: user.email,
-          };
-          setUser(signedInUser);
+          const user = userCredential.user;
+        })
+        .then((res) => {
+          // * Success Message
+          const userInfo = { ...user };
+          userInfo.message = (
+            <p style={{ color: "green" }}>
+              Congratulations! Account is Created
+            </p>
+          );
+          setUser(userInfo);
           history.replace(from);
         })
         .catch((error) => {
-          var errorMessage = error.message;
-          const newUserInfo = { ...user };
-          newUserInfo.error = errorMessage;
-          setUser(newUserInfo);
+          const errorMessage = error.message;
+          const userInfo = { ...user };
+          userInfo.message = <p style={{ color: "red" }}>{errorMessage}</p>;
+          setUser(userInfo);
         });
     }
 
+    if (!newUser && user.email && user.password) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(user.email, user.password)
+        .then((res) => {
+          const userInfo = { ...user };
+          userInfo.message = (
+            <p style={{ color: "green" }}>Account Logged In Successfully</p>
+          );
+          setUser(userInfo);
+          history.replace(from);
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          const userInfo = { ...user };
+          userInfo.message = <p style={{ color: "red" }}>{errorMessage}</p>;
+          setUser(userInfo);
+        });
+    }
     e.preventDefault();
   };
 
@@ -135,23 +162,27 @@ const SignUp = () => {
     <>
       <div className="container">
         <div className="signup">
-          <h2 className="fw-bold m-3">Create Account</h2>
+          <h2 className="fw-bold m-3">
+            {newUser ? "Create Account" : "Login"}
+          </h2>
           <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">
-                Name
-              </label>
-              <input
-                onBlur={handleBlur}
-                type="name"
-                name="name"
-                placeholder="Name..."
-                className="form-control"
-                id="exampleInputEmail1"
-                required
-                aria-describedby="emailHelp"
-              />
-            </div>
+            {newUser && (
+              <div className="mb-3">
+                <label htmlFor="exampleInputEmail1" className="form-label">
+                  Name
+                </label>
+                <input
+                  onBlur={handleBlur}
+                  type="name"
+                  name="name"
+                  placeholder="Name..."
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  required
+                  aria-describedby="emailHelp"
+                />
+              </div>
+            )}
             <div className="mb-3">
               <label htmlFor="exampleInputEmail1" className="form-label">
                 Email
@@ -205,16 +236,22 @@ const SignUp = () => {
             </div>
             {user.message && user.message}
             <button type="submit" className="btn btn-success w-100">
-              Sign Up
+              {newUser ? "Sign Up" : "Sign In"}
             </button>
             <p className="text-center mt-4">
-              Already Have an Account ?{" "}
-              <Link to="/login" style={{ color: "#157347" }}>
-                Log In
+              {newUser
+                ? "Already Have an Account ?"
+                : `Don't Have an Account ?`}{" "}
+              <Link
+                onClick={() => setNewUser(!newUser)}
+                to="/signup"
+                style={{ color: "#157347" }}
+              >
+                {newUser ? "Log In" : "Create Account"}
               </Link>
             </p>
           </form>
-          <div style={{ marginTop: "7rem" }}>
+          <div style={{ marginTop: "12rem" }}>
             <p className="text-center">OR</p>
             <div className="social-signin">
               <div className="google-sign-in">

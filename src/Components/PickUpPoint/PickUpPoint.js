@@ -1,7 +1,6 @@
 import React from "react";
 import "./PickUpPoint.css";
 import Map from "../../assets/images/Map.png";
-import searchResult from "../../fakeData/searchResult.json";
 
 const PickUpPoint = () => {
   const handleSearch = () => {};

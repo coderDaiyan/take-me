@@ -51,7 +51,7 @@ const Navbar = () => {
                 </li>
               ) : (
                 <li className="nav-item">
-                  <Link className="nav-link" to="/login">
+                  <Link className="nav-link" to="/signup">
                     <button className="btn btn-outline-success login-btn">
                       Login
                     </button>
