@@ -68,7 +68,7 @@ const PickUpPoint = () => {
         <div className="map-img">
           <iframe
             title="Google Maps"
-            width="500"
+            width="100%"
             height="600"
             frameborder="0"
             scrolling="no"

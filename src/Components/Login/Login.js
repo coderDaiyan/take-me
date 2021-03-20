@@ -22,7 +22,7 @@ const SignUp = () => {
   let history = useHistory();
   let location = useLocation();
   let { from } = location.state || {
-    from: { pathname: `/destination/${vehicleId}` },
+    from: { pathname: `/` },
   };
 
   const [user, setUser] = useState({
@@ -131,6 +131,7 @@ const SignUp = () => {
           );
           console.log(userInfo);
           setUser(userInfo);
+          updateUserName(userInfo);
           // setLoggedInUser(userInfo);
         })
         .catch((error) => {
@@ -162,6 +163,28 @@ const SignUp = () => {
         });
     }
     e.preventDefault();
+
+    const updateUserName = (name, email) => {
+      const user = firebase.auth().currentUser;
+
+      user
+        .updateProfile({
+          displayName: name,
+          email: email,
+        })
+        .then(() => {
+          // Update successful.
+          const userInfo = { ...user };
+          userInfo.message = (
+            <p style={{ color: "green" }}>User name updated successfully</p>
+          );
+          setUser(userInfo);
+        })
+        .catch((error) => {
+          // An error happened.
+          console.log(error);
+        });
+    };
   };
 
   return (
