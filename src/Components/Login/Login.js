@@ -18,7 +18,6 @@ if (!firebase.apps.length) {
 const SignUp = () => {
   let passwordMatched = false;
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-  console.log(loggedInUser);
   let history = useHistory();
   let location = useLocation();
   let { from } = location.state || {
@@ -137,6 +136,7 @@ const SignUp = () => {
           console.log(userInfo);
           setUser(userInfo);
           updateUserName(userInfo.name);
+          history.replace(from);
           // setLoggedInUser(userInfo);
         })
         .catch((error) => {
@@ -152,13 +152,12 @@ const SignUp = () => {
         .auth()
         .signInWithEmailAndPassword(user.email, user.password)
         .then((res) => {
-          const newUser = res.user;
-          const { displayName, email } = newUser;
           let userInfo = { ...user };
-          userInfo = {
-            name: displayName,
-            email: email,
-          };
+          // userInfo = {
+          //   // name: displayName,
+          //   // email: email,
+          // };
+
           userInfo.message = (
             <p style={{ color: "green" }}>Account Logged In Successfully</p>
           );
