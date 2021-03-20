@@ -36,12 +36,12 @@ const Navbar = () => {
               <li className="nav-item">
                 <Link className="nav-link text-dark">Contact</Link>
               </li>
-              {loggedInUser.name ? (
+              {loggedInUser.name || loggedInUser.email ? (
                 <li
                   className="nav-item text-dark mt-2"
                   style={{ marginLeft: "10px" }}
                 >
-                  {loggedInUser.name}
+                  {loggedInUser.name || loggedInUser.email}
                 </li>
               ) : (
                 <li className="nav-item">

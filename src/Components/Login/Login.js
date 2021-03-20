@@ -131,7 +131,7 @@ const SignUp = () => {
           );
           console.log(userInfo);
           setUser(userInfo);
-          setLoggedInUser(userInfo);
+          // setLoggedInUser(userInfo);
         })
         .catch((error) => {
           const errorMessage = error.message;
@@ -242,7 +242,7 @@ const SignUp = () => {
             </div>
             {user.message && user.message}
             <button type="submit" className="btn btn-success w-100">
-              Sign Up
+              {newUser ? "Sign Up" : "Sign In"}
             </button>
             <p className="text-center mt-4">
               {newUser
