@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation, useParams } from "react-router-dom";
 import "./Login.css";
 import Google from "../../assets/icon/search.svg";
 import Github from "../../assets/icon/github.svg";
@@ -16,11 +16,14 @@ if (!firebase.apps.length) {
 }
 
 const SignUp = () => {
+  let { vehicleId } = useParams();
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
   console.log(loggedInUser);
   let history = useHistory();
   let location = useLocation();
-  let { from } = location.state || { from: { pathname: "/pickup/:vehicle" } };
+  let { from } = location.state || {
+    from: { pathname: `/destination/${vehicleId}` },
+  };
 
   const [user, setUser] = useState({
     name: "",

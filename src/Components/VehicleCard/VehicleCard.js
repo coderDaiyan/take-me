@@ -9,7 +9,7 @@ const VehicleCard = () => {
       <div className="all-vehicle-cards">
         {fakeData.map((vehicle) => (
           <div className="vehicle-card">
-            <Link to={`pickup/${vehicle.vehicle}`}>
+            <Link to={`/destination/${vehicle.id}`}>
               <img className="vehicle-img" src={vehicle.vehicleIcon} alt="" />
             </Link>
             <h2>{vehicle.vehicle}</h2>

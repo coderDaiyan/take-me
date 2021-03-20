@@ -26,7 +26,7 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
-          <PrivateRoute path="/pickup/:vehicle">
+          <PrivateRoute path="/destination/:vehicleId">
             <Destination />
           </PrivateRoute>
         </Switch>
