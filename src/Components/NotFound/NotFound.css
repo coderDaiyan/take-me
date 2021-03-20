@@ -1,0 +1,13 @@
+.not-found {
+  height: 100vh;
+  background-color: #222f3e;
+  color: white;
+}
+.four-o-four {
+  font-size: 6rem;
+  font-weight: 300;
+}
+.not-found-text {
+  font-size: 1.35rem;
+  font-weight: 300;
+}

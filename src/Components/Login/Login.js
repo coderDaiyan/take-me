@@ -135,7 +135,7 @@ const SignUp = () => {
           );
           console.log(userInfo);
           setUser(userInfo);
-          updateUserName(userInfo);
+          updateUserName(userInfo.name);
           // setLoggedInUser(userInfo);
         })
         .catch((error) => {
@@ -173,21 +173,16 @@ const SignUp = () => {
     }
     e.preventDefault();
 
-    const updateUserName = (name, email) => {
+    const updateUserName = (name) => {
       const user = firebase.auth().currentUser;
 
       user
         .updateProfile({
           displayName: name,
-          email: email,
         })
         .then(() => {
           // Update successful.
-          const userInfo = { ...user };
-          userInfo.message = (
-            <p style={{ color: "green" }}>User name updated successfully</p>
-          );
-          setUser(userInfo);
+          console.log("updated successfully");
         })
         .catch((error) => {
           // An error happened.
