@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useHistory, useLocation, useParams } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import "./Login.css";
 import Google from "../../assets/icon/search.svg";
 import Github from "../../assets/icon/github.svg";
@@ -34,7 +34,7 @@ const SignUp = () => {
   });
   const [newUser, setNewUser] = useState(false);
   const handleGoogleSignIn = () => {
-    var provider = new firebase.auth.GoogleAuthProvider();
+    const provider = new firebase.auth.GoogleAuthProvider();
     firebase
       .auth()
       .signInWithPopup(provider)
@@ -54,19 +54,19 @@ const SignUp = () => {
       })
       .catch((error) => {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        const errorCode = error.code;
+        const errorMessage = error.message;
         console.log(errorCode, errorMessage);
       });
   };
 
   const handleGithubSignIn = () => {
-    var provider = new firebase.auth.GithubAuthProvider();
+    const provider = new firebase.auth.GithubAuthProvider();
     firebase
       .auth()
       .signInWithPopup(provider)
       .then((result) => {
-        var user = result.user;
+        const user = result.user;
         const { displayName, email } = user;
         const signedInUser = {
           name: displayName,
@@ -79,7 +79,7 @@ const SignUp = () => {
       })
       .catch((error) => {
         // Handle Errors here.
-        var errorMessage = error.message;
+        const errorMessage = error.message;
         console.log(errorMessage);
       });
   };
@@ -122,11 +122,12 @@ const SignUp = () => {
         .createUserWithEmailAndPassword(user.email, user.password)
         .then((userCredential) => {
           // Signed in
-          var newUser = userCredential.user;
+          const newUser = userCredential.user;
+          const { displayName, email } = newUser;
           let userInfo = { ...user };
           userInfo = {
-            name: newUser.displayName,
-            email: newUser.email,
+            name: displayName,
+            email: email,
           };
           userInfo.message = (
             <p style={{ color: "green" }}>
@@ -152,10 +153,11 @@ const SignUp = () => {
         .signInWithEmailAndPassword(user.email, user.password)
         .then((res) => {
           const newUser = res.user;
+          const { displayName, email } = newUser;
           let userInfo = { ...user };
           userInfo = {
-            name: newUser.displayName,
-            email: newUser.email,
+            name: displayName,
+            email: email,
           };
           userInfo.message = (
             <p style={{ color: "green" }}>Account Logged In Successfully</p>

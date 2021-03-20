@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Destination.css";
-import Map from "../../assets/images/Map.png";
 import { useParams } from "react-router";
+import People from "../../assets/icon/group.svg";
 import vehicles from "../../fakeData/vehicles.json";
 
 const PickUpPoint = () => {
@@ -23,7 +23,7 @@ const PickUpPoint = () => {
   const { vehicle, vehicleIcon, capacity, price } = searchResult;
   return (
     <div className="parent" style={{ marginTop: "7rem" }}>
-      <div style={{ height: result && "580px" }} className="pick-up">
+      <div style={{ height: result && "600px" }} className="pick-up">
         <form onSubmit={handleSearch} action="">
           <h5>Pick From</h5>
           <input className="form-control mt-3 mb-3" type="text" required />
@@ -35,31 +35,46 @@ const PickUpPoint = () => {
         </form>
         {result && (
           <div className="search-results">
-            <img className="vehicle-icon" src={vehicleIcon} alt="" />
-            <h4>{searchResult && vehicle}</h4>
-            <h4>{capacity}</h4>
+            <img
+              className="vehicle-icon"
+              src={searchResult.vehicleIcon && vehicleIcon}
+              alt=""
+            />
+            <h4>{searchResult.vehicle && vehicle}</h4>
+            <img className="people-icon" src={People} alt="" />
+            <h4>{searchResult && capacity}</h4>
             <div className="price">
-              <h4>${price}</h4>
+              <h4>${searchResult && price}</h4>
             </div>
           </div>
         )}
         {result && (
           <div className="search-results">
-            <img className="vehicle-icon" src={vehicleIcon} alt="" />
-            <h4>{vehicle}</h4>
-            <h4>{capacity}</h4>
+            <img
+              className="vehicle-icon"
+              src={searchResult.vehicleIcon && vehicleIcon}
+              alt=""
+            />
+            <h4>{searchResult.vehicle && vehicle}</h4>
+            <img className="people-icon" src={People} alt="" />
+            <h4>{searchResult && capacity}</h4>
             <div className="price">
-              <h4>${price}</h4>
+              <h4>${searchResult && price}</h4>
             </div>
           </div>
         )}
         {result && (
           <div className="search-results">
-            <img className="vehicle-icon" src={vehicleIcon} alt="" />
-            <h4>{vehicle}</h4>
-            <h4>{capacity}</h4>
+            <img
+              className="vehicle-icon"
+              src={searchResult.vehicleIcon && vehicleIcon}
+              alt=""
+            />
+            <h4>{searchResult.vehicle && vehicle}</h4>
+            <img className="people-icon" src={People} alt="" />
+            <h4>{searchResult && capacity}</h4>
             <div className="price">
-              <h4>${price}</h4>
+              <h4>${searchResult && price}</h4>
             </div>
           </div>
         )}

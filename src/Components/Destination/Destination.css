@@ -36,6 +36,11 @@
 .map-img {
   width: 500px;
 }
+.people-icon {
+  width: 40px;
+  margin-left: 20px;
+  margin-right: 10px;
+}
 @media (max-width: 1170px) {
   .map {
     margin-top: 30px;
@@ -51,6 +56,9 @@
   .map-img {
     width: 220px;
   }
+  .search-results {
+    width: 350px;
+  }
 }
 @media (max-width: 890px) {
   .map {
@@ -61,6 +69,9 @@
   }
   .pick-up {
     width: 350px;
+  }
+  .search-results {
+    width: 300px;
   }
 }
 @media (max-width: 750px) {
@@ -102,6 +113,9 @@
     display: block;
   }
   .pick-up {
-    width: 250px;
+    width: 330px;
+  }
+  .search-results {
+    width: 280px;
   }
 }

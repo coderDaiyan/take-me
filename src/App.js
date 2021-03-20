@@ -27,12 +27,12 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
-          <Route path="*">
-            <NotFound />
-          </Route>
           <PrivateRoute path="/destination/:vehicleId">
             <Destination />
           </PrivateRoute>
+          <Route path="*">
+            <NotFound />
+          </Route>
         </Switch>
       </Router>
     </UserContext.Provider>
