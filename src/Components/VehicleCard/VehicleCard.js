@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 const VehicleCard = () => {
   return (
     <>
-      <div className="all-vehicle-cards">
+      <div className="all-vehicle-cards container-fluid row">
         {fakeData.map((vehicle) => (
-          <div className="vehicle-card">
+          <div className="vehicle-card col-md-4">
             <Link to={`/destination/${vehicle.id}`}>
               <img className="vehicle-img" src={vehicle.vehicleIcon} alt="" />
             </Link>

@@ -1,5 +1,5 @@
 .home {
   background: url(../../assets/images/Bg.png);
-  background-size: contain;
-  height: 100vh;
+  background-size: cover;
+  height: 200vh;
 }

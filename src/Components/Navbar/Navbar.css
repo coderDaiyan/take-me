@@ -5,3 +5,8 @@ nav ul {
   position: absolute;
   top: 18px;
 }
+@media (max-width: 1038px) {
+  .login-btn {
+    margin-top: 150px !important;
+  }
+}
