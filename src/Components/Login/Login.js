@@ -16,7 +16,7 @@ if (!firebase.apps.length) {
 }
 
 const SignUp = () => {
-  let { vehicleId } = useParams();
+  let passwordMatched = false;
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
   console.log(loggedInUser);
   let history = useHistory();
@@ -94,6 +94,16 @@ const SignUp = () => {
       const passwordHasSpecialCharacter = /\W|_/g.test(e.target.value);
       isFieldValid =
         isPasswordValid && passwordHasNumber && passwordHasSpecialCharacter;
+    } else if (e.target.name === "passwordConfirm") {
+      passwordMatched = true;
+      const isPasswordValid = e.target.value.length > 6;
+      const passwordHasNumber = /\d{1}/.test(e.target.value);
+      const passwordHasSpecialCharacter = /\W|_/g.test(e.target.value);
+      isFieldValid =
+        passwordMatched &&
+        isPasswordValid &&
+        passwordHasNumber &&
+        passwordHasSpecialCharacter;
     }
     if (isFieldValid) {
       const newUserInfo = { ...user };
@@ -103,14 +113,8 @@ const SignUp = () => {
   };
 
   const handleSubmit = (e) => {
-    if (
-      document.getElementById("password").value !==
-      document.getElementById("password-confirm").value
-    ) {
-      alert(`Password Not Matched`);
-    }
     if (!isFieldValid) {
-      alert("Error: Not Valid Email or Password");
+      alert("Error: Not Valid Email or Password Or Password Not Matched");
     }
     if (newUser && user.email && user.password) {
       firebase
@@ -253,7 +257,7 @@ const SignUp = () => {
               <input
                 onBlur={handleBlur}
                 type="password"
-                name="password"
+                name="passwordConfirm"
                 id="password-confirm"
                 required
                 placeholder="Type Again..."
