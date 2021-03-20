@@ -147,7 +147,12 @@ const SignUp = () => {
         .auth()
         .signInWithEmailAndPassword(user.email, user.password)
         .then((res) => {
-          const userInfo = { ...user };
+          const newUser = res.user;
+          let userInfo = { ...user };
+          userInfo = {
+            name: newUser.displayName,
+            email: newUser.email,
+          };
           userInfo.message = (
             <p style={{ color: "green" }}>Account Logged In Successfully</p>
           );
