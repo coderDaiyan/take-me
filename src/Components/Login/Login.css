@@ -43,3 +43,8 @@ input:active {
 .social {
   width: 30px;
 }
+@media (max-width: 540px) {
+  .signup {
+    width: 400px;
+  }
+}
