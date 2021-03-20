@@ -36,3 +36,72 @@
 .map-img {
   width: 500px;
 }
+@media (max-width: 1170px) {
+  .map {
+    margin-top: 30px;
+  }
+  .map-img {
+    width: 300px;
+  }
+}
+@media (max-width: 970px) {
+  .map {
+    margin-top: 70px;
+  }
+  .map-img {
+    width: 220px;
+  }
+}
+@media (max-width: 890px) {
+  .map {
+    margin-top: 70px;
+  }
+  .map-img {
+    width: 150px;
+  }
+  .pick-up {
+    width: 350px;
+  }
+}
+@media (max-width: 750px) {
+  .map {
+    margin-left: 130px;
+  }
+  .map-img {
+    width: 350px;
+  }
+  .parent {
+    display: block;
+  }
+  .pick-up {
+    width: 350px;
+  }
+}
+@media (max-width: 625px) {
+  .map {
+    margin-left: 130px;
+  }
+  .map-img {
+    width: 250px;
+  }
+  .parent {
+    display: block;
+  }
+  .pick-up {
+    width: 250px;
+  }
+}
+@media (max-width: 500px) {
+  .map {
+    margin-left: 130px;
+  }
+  .map-img {
+    width: 230px;
+  }
+  .parent {
+    display: block;
+  }
+  .pick-up {
+    width: 250px;
+  }
+}
