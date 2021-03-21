@@ -136,8 +136,7 @@ const SignUp = () => {
           userInfo.message = <p style={{ color: "red" }}>{errorMessage}</p>;
           setUser(userInfo);
         });
-    }
-    if (!newUser && user.email && user.password) {
+    } else if (!newUser && user.email && user.password) {
       firebase
         .auth()
         .signInWithEmailAndPassword(user.email, user.password)
