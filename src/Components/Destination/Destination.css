@@ -4,7 +4,7 @@
 }
 .pick-up {
   width: 400px;
-  height: 295px;
+  height: 300px;
   background: #efefef;
   border-radius: 10px;
   margin: 20px;
@@ -41,6 +41,14 @@
   margin-left: 20px;
   margin-right: 10px;
 }
+.orange-destination-div {
+  background-color: orange;
+  width: 350px;
+  height: 120px;
+  border-radius: 10px;
+  margin-left: 15px;
+  padding: 20px;
+}
 @media (max-width: 1170px) {
   .map {
     margin-top: 30px;
@@ -73,6 +81,9 @@
   .search-results {
     width: 300px;
   }
+  .orange-destination-div {
+    width: 300px;
+  }
 }
 @media (max-width: 750px) {
   .map {
@@ -99,23 +110,33 @@
     display: block;
   }
   .pick-up {
-    width: 250px;
+    width: 350px;
+  }
+  .orange-destination-div {
+    width: 300px;
+  }
+  .search-results {
+    width: 300px;
   }
 }
 @media (max-width: 500px) {
   .map {
-    margin-left: 130px;
+    margin-left: 80px;
   }
   .map-img {
-    width: 230px;
+    width: 280px;
   }
   .parent {
     display: block;
   }
   .pick-up {
     width: 330px;
+    margin-left: 70px;
   }
   .search-results {
+    width: 280px;
+  }
+  .orange-destination-div {
     width: 280px;
   }
 }

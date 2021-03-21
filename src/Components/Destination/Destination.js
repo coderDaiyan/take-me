@@ -6,6 +6,10 @@ import vehicles from "../../fakeData/vehicles.json";
 
 const PickUpPoint = () => {
   const [searchResult, setSearchResult] = useState({});
+  const [destination, setDestination] = useState({
+    from: "",
+    to: "",
+  });
   const [result, setResult] = useState(false);
   let { vehicleId } = useParams();
   const handleSearch = (e) => {
@@ -20,19 +24,51 @@ const PickUpPoint = () => {
     }
     e.preventDefault();
   };
+  const handleBlur = (e) => {
+    if (e.target.name === "from") {
+      const newDestination = { ...destination };
+      newDestination.from = e.target.value;
+      setDestination(newDestination);
+    } else if (e.target.name === "to") {
+      const newDestination = { ...destination };
+      newDestination.to = e.target.value;
+      setDestination(newDestination);
+    }
+  };
   const { vehicle, vehicleIcon, capacity, price } = searchResult;
   return (
     <div className="parent" style={{ marginTop: "7rem" }}>
-      <div style={{ height: result && "600px" }} className="pick-up">
-        <form onSubmit={handleSearch} action="">
-          <h5>Pick From</h5>
-          <input className="form-control mt-3 mb-3" type="text" required />
-          <h5>Pick To</h5>
-          <input className="form-control mt-3 mb-3" type="text" required />
-          <button className="w-100 btn btn-success" type="submit">
-            Search
-          </button>
-        </form>
+      <div style={{ height: result && "460px" }} className="pick-up">
+        {!result && (
+          <form onSubmit={handleSearch} action="">
+            <h5>Pick From</h5>
+            <input
+              className="form-control mt-3 mb-3"
+              name="from"
+              onBlur={handleBlur}
+              type="text"
+              required
+            />
+            <h5>Pick To</h5>
+            <input
+              className="form-control mt-3 mb-3"
+              name="to"
+              type="text"
+              onBlur={handleBlur}
+              required
+            />
+            <button className="w-100 btn btn-success" type="submit">
+              Search
+            </button>
+          </form>
+        )}
+        {result && (
+          <div className="orange-destination-div">
+            <h4>From: {destination?.from}</h4>
+            <br />
+            <h4>To: {destination?.to}</h4>
+          </div>
+        )}
         {result && (
           <div className="search-results">
             <img
