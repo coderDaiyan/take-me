@@ -1,5 +1,5 @@
 .home {
   background: url(../../assets/images/Bg.png);
+  min-height: 120vh;
   background-size: cover;
-  height: 200vh;
 }

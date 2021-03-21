@@ -72,7 +72,7 @@ const PickUpPoint = () => {
             </form>
           )}
           {result && (
-            <div className="orange-destination-div">
+            <div className="red-destination-div">
               <h4>From: {destination?.from}</h4>
               <br />
               <h4>To: {destination?.to}</h4>
