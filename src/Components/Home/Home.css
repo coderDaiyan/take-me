@@ -1,6 +1,6 @@
 .home {
   background: #34495e fixed;
-  height: 100vh;
+  height: 120vh;
   background-size: cover;
 }
 @media (max-width: 1091px) {

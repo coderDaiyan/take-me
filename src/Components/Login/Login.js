@@ -16,7 +16,6 @@ if (!firebase.apps.length) {
 }
 
 const SignUp = () => {
-  let passwordMatched = false;
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
   let history = useHistory();
   let location = useLocation();
@@ -28,6 +27,7 @@ const SignUp = () => {
     name: "",
     email: "",
     password: "",
+    passwordConfirm: "",
     error: "",
     message: "",
   });
@@ -85,36 +85,28 @@ const SignUp = () => {
   const handleBlur = (e) => {
     if (e.target.name === "email") {
       isFieldValid = /\S+@\S+\.\S+/.test(e.target.value);
-    } else if (e.target.name === "password") {
+    } else if (
+      e.target.name === "password" ||
+      e.target.name === "passwordConfirm"
+    ) {
       const isPasswordValid = e.target.value.length > 6;
       const passwordHasNumber = /\d{1}/.test(e.target.value);
       const passwordHasSpecialCharacter = /\W|_/g.test(e.target.value);
       isFieldValid =
         isPasswordValid && passwordHasNumber && passwordHasSpecialCharacter;
-    } else if (e.target.name === "passwordConfirm") {
-      passwordMatched = true;
-      const isPasswordValid = e.target.value.length > 6;
-      const passwordHasNumber = /\d{1}/.test(e.target.value);
-      const passwordHasSpecialCharacter = /\W|_/g.test(e.target.value);
-      isFieldValid =
-        passwordMatched &&
-        isPasswordValid &&
-        passwordHasNumber &&
-        passwordHasSpecialCharacter;
+      console.log(isFieldValid);
     }
     if (isFieldValid) {
       const newUserInfo = { ...user };
       newUserInfo[e.target.name] = e.target.value;
       setUser(newUserInfo);
+      console.log(newUserInfo);
     }
   };
 
   const handleSubmit = (e) => {
-    if (!isFieldValid) {
+    if (user.password !== user.passwordConfirm) {
       alert("Error: Not Valid Email or Password");
-    }
-    if (!passwordMatched) {
-      alert("Password Not Matched");
     } else if (newUser && user.email && user.password) {
       firebase
         .auth()
@@ -151,10 +143,6 @@ const SignUp = () => {
         .signInWithEmailAndPassword(user.email, user.password)
         .then((res) => {
           let userInfo = { ...user };
-          // userInfo = {
-          //   // name: displayName,
-          //   // email: email,
-          // };
 
           userInfo.message = (
             <p style={{ color: "green" }}>Account Logged In Successfully</p>
@@ -170,7 +158,6 @@ const SignUp = () => {
           setUser(userInfo);
         });
     }
-    e.preventDefault();
 
     const updateUserName = (name) => {
       const user = firebase.auth().currentUser;
@@ -188,6 +175,7 @@ const SignUp = () => {
           console.log(error);
         });
     };
+    e.preventDefault();
   };
 
   return (
