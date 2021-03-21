@@ -27,4 +27,4 @@ Technologies used in this Project mentioned below:
 
 ## Live Site Link
 
-[Live Site](https://fantasy-sports-daiyan.netlify.app/)
+[Live Site](https://take-me-9da3a.web.app/)
