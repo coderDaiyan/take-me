@@ -1,6 +1,6 @@
 .parent {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 .pick-up {
   width: 400px;
