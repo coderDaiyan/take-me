@@ -100,7 +100,6 @@ const SignUp = () => {
       const newUserInfo = { ...user };
       newUserInfo[e.target.name] = e.target.value;
       setUser(newUserInfo);
-      console.log(newUserInfo);
     }
   };
 
