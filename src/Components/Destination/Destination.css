@@ -33,9 +33,6 @@
 .map {
   margin-right: 120px;
 }
-.map-img {
-  width: 500px;
-}
 .people-icon {
   width: 40px;
   margin-left: 20px;
@@ -62,7 +59,7 @@
     margin-top: 70px;
   }
   .map-img {
-    width: 220px;
+    width: 200px !important;
   }
   .search-results {
     width: 350px;
@@ -73,10 +70,14 @@
     margin-top: 70px;
   }
   .map-img {
-    width: 150px;
+    width: 150px !important;
+    margin-left: 100px;
   }
   .pick-up {
     width: 350px;
+  }
+  .parent {
+    display: block !important;
   }
   .search-results {
     width: 300px;
@@ -90,10 +91,10 @@
     margin-left: 130px;
   }
   .map-img {
-    width: 350px;
+    margin-left: -45px !important;
   }
   .parent {
-    display: block;
+    display: block !important;
   }
   .pick-up {
     width: 350px;
@@ -104,7 +105,8 @@
     margin-left: 130px;
   }
   .map-img {
-    width: 250px;
+    width: 250px !important;
+    margin-left: -80px;
   }
   .parent {
     display: block;
@@ -124,7 +126,7 @@
     margin-left: 80px;
   }
   .map-img {
-    width: 280px;
+    margin-left: -25px !important;
   }
   .parent {
     display: block;

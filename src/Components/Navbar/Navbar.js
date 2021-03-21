@@ -32,10 +32,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link
-                  className="nav-link"
-                  onClick={() => alert("Hey! Select a Ride First!")}
-                >
+                <Link className="nav-link" to="/login">
                   Destination
                 </Link>
               </li>

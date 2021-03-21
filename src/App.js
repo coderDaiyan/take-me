@@ -7,6 +7,7 @@ import Login from "./Components/Login/Login";
 import { createContext, useState } from "react";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import NotFound from "./Components/NotFound/NotFound";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 export const UserContext = createContext();
 

@@ -113,9 +113,11 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     if (!isFieldValid) {
-      alert("Error: Not Valid Email or Password Or Password Not Matched");
+      alert("Error: Not Valid Email or Password");
     }
-    if (newUser && user.email && user.password) {
+    if (!passwordMatched) {
+      alert("Password Not Matched");
+    } else if (newUser && user.email && user.password) {
       firebase
         .auth()
         .createUserWithEmailAndPassword(user.email, user.password)

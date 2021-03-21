@@ -3,8 +3,16 @@ import "./Destination.css";
 import { useParams } from "react-router";
 import People from "../../assets/icon/group.svg";
 import vehicles from "../../fakeData/vehicles.json";
+import ReactMapGL from "react-map-gl";
 
 const PickUpPoint = () => {
+  let [viewport, setViewport] = useState({
+    latitude: 23.82235,
+    longitude: 90.365417,
+    zoom: 8,
+    width: "400px",
+    height: "400px",
+  });
   const [searchResult, setSearchResult] = useState({});
   const [destination, setDestination] = useState({
     from: "",
@@ -117,16 +125,13 @@ const PickUpPoint = () => {
       </div>
       <div className="map">
         <div className="map-img">
-          <iframe
-            title="Google Map"
-            src="https://www.google.com/maps/d/embed?mid=1cKzlQwRa_rKNPDi9Vz6D24WuNCI"
-            width="100%"
-            height="600"
-            frameborder="0"
-            scrolling="no"
-            marginheight="0"
-            marginwidth="0"
-          ></iframe>
+          <ReactMapGL
+            mapboxApiAccessToken={
+              "pk.eyJ1IjoiZGV2ZWxvcGVyZGFpeWFuIiwiYSI6ImNrbWl0bDdwejBrcjgybm52YWg5bnhxOHUifQ.geGOlcnfET9ER3Bv5TNmaw"
+            }
+            {...viewport}
+            onViewportChange={(newViewport) => setViewport(newViewport)}
+          ></ReactMapGL>
         </div>
       </div>
     </div>
