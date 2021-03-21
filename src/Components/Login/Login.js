@@ -38,7 +38,6 @@ const SignUp = () => {
       .auth()
       .signInWithPopup(provider)
       .then((res) => {
-        console.log(res.user);
         // ? Sign in successful
         const { displayName, email } = res.user;
         const signedInUser = {
@@ -73,7 +72,6 @@ const SignUp = () => {
         };
         setLoggedInUser(signedInUser);
         setUser(signedInUser);
-        console.log(signedInUser);
         history.replace(from);
       })
       .catch((error) => {
@@ -135,7 +133,6 @@ const SignUp = () => {
               Congratulations! Account is Created
             </p>
           );
-          console.log(userInfo);
           setUser(userInfo);
           updateUserName(userInfo.name);
           history.replace(from);
@@ -149,7 +146,6 @@ const SignUp = () => {
         });
     }
     if (!newUser && user.email && user.password) {
-      console.log(user.email, user.password);
       firebase
         .auth()
         .signInWithEmailAndPassword(user.email, user.password)

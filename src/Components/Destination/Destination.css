@@ -20,9 +20,6 @@
   width: 50px;
   height: 50px;
 }
-/* .map {
-  margin-right: 120px;
-} */
 .people-icon {
   width: 40px;
   margin-left: 20px;
@@ -37,99 +34,3 @@
   margin-left: 15px;
   padding: 20px;
 }
-/* @media (max-width: 1170px) {
-  .map {
-    margin-top: 30px;
-  }
-  .map-img {
-    width: 300px;
-  }
-}
-@media (max-width: 970px) {
-  .map {
-    margin-top: 70px;
-  }
-  .map-img {
-    width: 280px !important;
-  }
-  .search-results {
-    width: 350px;
-  }
-}
-@media (max-width: 890px) {
-  .map {
-    margin-top: 70px;
-  }
-  .map-img {
-    width: 250px !important;
-    margin-left: 100px;
-  }
-  .pick-up {
-    width: 350px;
-  }
-  .parent {
-    display: block !important;
-  }
-  .search-results {
-    width: 300px;
-  }
-  .red-destination-div {
-    width: 300px;
-  }
-}
-@media (max-width: 750px) {
-  .map {
-    margin-left: 130px;
-  }
-  .map-img {
-    margin-left: -45px !important;
-  }
-  .parent {
-    display: block !important;
-  }
-  .pick-up {
-    width: 350px;
-  }
-}
-@media (max-width: 625px) {
-  .map {
-    margin-left: 130px;
-  }
-  .map-img {
-    width: 250px !important;
-    margin-left: -80px;
-  }
-  .parent {
-    display: block;
-  }
-  .pick-up {
-    width: 350px;
-  }
-  .red-destination-div {
-    width: 300px;
-  }
-  .search-results {
-    width: 300px;
-  }
-}
-@media (max-width: 500px) {
-  .map {
-    margin-left: 80px;
-  }
-  .map-img {
-    margin-left: -25px !important;
-  }
-  .parent {
-    display: block;
-  }
-  .pick-up {
-    width: 330px;
-    margin-left: 70px;
-  }
-  .search-results {
-    width: 280px;
-  }
-  .red-destination-div {
-    width: 280px;
-  }
-} */

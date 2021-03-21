@@ -26,7 +26,6 @@ const PickUpPoint = () => {
     );
     setSearchResult(searchResultById);
     setResult(true);
-    console.log(searchResult);
     if (e.target.value === "") {
       alert("Error");
     }

@@ -1,5 +1,15 @@
 .home {
-  background: url(../../assets/images/Bg.png);
-  min-height: 120vh;
+  background: #34495e fixed;
+  height: 100vh;
   background-size: cover;
+}
+@media (max-width: 1091px) {
+  .home {
+    height: 130vh;
+  }
+}
+@media (max-width: 584px) {
+  .home {
+    height: 210vh;
+  }
 }

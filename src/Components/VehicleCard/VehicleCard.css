@@ -20,6 +20,7 @@
 }
 .vehicle-card:hover {
   transform: scale(1.2, 1.2);
+  border: 5px solid #2f3640;
 }
 .vehicle-card h2 {
   text-transform: uppercase;
