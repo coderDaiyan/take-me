@@ -17,12 +17,10 @@ Technologies used in this Project mentioned below:
 ## Features
 
 ```
-1. User can see some vehicles which are loaded from fake data
-2. User can choose any vehicle of his choice
-3. There is a authentication system so that any anonymous user can't access another user's information
-4. There are 3 Types of authentication system : Email/Password, Google & Github
-5. There is a validation system so that user can't spam or something like that
-6. When user logins successfully they redirect to destination page and able to see available rides
+1. There are some Vehicles loaded from fake data, Users can choose any vehicle of their choice.
+2. There is an authentication system so that any anonymous user can't access another user's information.
+3. There is a validation system so that users can't spam or something like that.
+4. When user logins successfully they redirect to the destination page and can see available rides.
 ```
 
 ## Live Site Link

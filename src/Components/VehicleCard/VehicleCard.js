@@ -1,7 +1,7 @@
 import React from "react";
-import "./VehicleCard.css";
-import fakeData from "../../fakeData/vehicles.json";
 import { Link } from "react-router-dom";
+import fakeData from "../../fakeData/vehicles.json";
+import "./VehicleCard.css";
 
 const VehicleCard = () => {
   return (

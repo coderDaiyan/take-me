@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import { UserContext } from "../../App";
 import "./Navbar.css";
 
 const Navbar = () => {
-  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-  let { vehicleId } = useParams();
+  const [loggedInUser] = useContext(UserContext);
 
   console.log(loggedInUser);
   return (
