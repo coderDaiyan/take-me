@@ -17,7 +17,7 @@ Technologies used in this Project mentioned below:
 ## Features
 
 ```
-1. User can see some vehicles
+1. User can see some vehicles which are loaded from fake data
 2. User can choose any vehicle of his choice
 3. There is a authentication system so that any anonymous user can't access another user's information
 4. There are 3 Types of authentication system : Email/Password, Google & Github
