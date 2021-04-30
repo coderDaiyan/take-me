@@ -1,13 +1,12 @@
-import React, { useContext, useState } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
-import "./Login.css";
-import Google from "../../assets/icon/search.svg";
-import Github from "../../assets/icon/github.svg";
-
 import firebase from "firebase/app";
 import "firebase/auth";
-import { firebaseConfig } from "./firebase.config";
+import React, { useContext, useState } from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { UserContext } from "../../App";
+import Github from "../../assets/icon/github.svg";
+import Google from "../../assets/icon/search.svg";
+import { firebaseConfig } from "./firebase.config";
+import "./Login.css";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -56,6 +55,8 @@ const SignUp = () => {
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
       });
+
+    console.log(loggedInUser);
   };
 
   const handleGithubSignIn = () => {
@@ -183,7 +184,7 @@ const SignUp = () => {
           <h2 className="fw-bold m-3">
             {newUser ? "Create Account" : "Login"}
           </h2>
-          <form onSubmit={handleSubmit}>
+          <form className="" onSubmit={handleSubmit}>
             {newUser && (
               <div className="mb-3">
                 <label htmlFor="exampleInputEmail1" className="form-label">

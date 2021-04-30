@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
-import "./Navbar.css";
 import { Link, useParams } from "react-router-dom";
+import swal from "sweetalert";
 import { UserContext } from "../../App";
+import "./Navbar.css";
 
 const Navbar = () => {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
   let { vehicleId } = useParams();
+
+  console.log(loggedInUser);
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -32,7 +35,14 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/login">
+                <Link
+                  className="nav-link"
+                  to={
+                    loggedInUser.isSignedIn === false
+                      ? `/login`
+                      : swal("Hey!", "Select a Vehicle First", "warning")
+                  }
+                >
                   Destination
                 </Link>
               </li>
