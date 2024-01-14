@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./Destination.css";
+import ReactMapGL from "react-map-gl";
 import { useParams } from "react-router";
 import People from "../../assets/icon/group.svg";
 import vehicles from "../../fakeData/vehicles.json";
-import ReactMapGL from "react-map-gl";
+import "./Destination.css";
 
 const PickUpPoint = () => {
   let [viewport, setViewport] = useState({
@@ -126,7 +126,7 @@ const PickUpPoint = () => {
         <div className="map col-lg-6">
           <ReactMapGL
             mapboxApiAccessToken={
-              "pk.eyJ1IjoiZGV2ZWxvcGVyZGFpeWFuIiwiYSI6ImNrbWl0bDdwejBrcjgybm52YWg5bnhxOHUifQ.geGOlcnfET9ER3Bv5TNmaw"
+              "pk.eyJ1IjoiZGFpeWFuanMiLCJhIjoiY2xyZWlkdHlsMWV0NDJsbXdmdm5rNnQyayJ9.7FtBaNtEJLtm7vfk29pPLg"
             }
             {...viewport}
             onViewportChange={(newViewport) => setViewport(newViewport)}
